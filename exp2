@@ -1,0 +1,19 @@
+clc;
+clear;
+ps = input("Enter the power of source")
+L = input("enter the Length.");
+alpha = input("emetr the attenuation");
+splice_loss = input("enter the splice loss");
+pr = input("enter the receiver power");
+noise_pen = input("enter the noise penalty");
+N = input("enter the number of connectors");
+pc = input("enter the connector loss");
+
+M = L;
+pr_new = input("enter the new sensitivity");
+
+p_sys = ps - pr - N * pc - M * splice_loss - alpha * L - noise_pen;
+disp("The system margin:", p_sys)
+
+p_sysnew = ps - pr_new - N * pc - M * splice_loss - alpha * L - noise_pen;
+disp("The new system margin at the given sensitivity is:", p_sysnew)
