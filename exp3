@@ -1,0 +1,24 @@
+tr_material = input("Enter material dispersion rise time (in ns):") * 1e-9;
+tr_modal = input("Enter modal dispersion rise time (in ns):") * 1e-9;
+BW_receiver = input("Enter receiver bandwidth (in MHz):") * 1e6;
+
+tr_receiver = 0.35 / BW_receiver;
+
+tr_system = sqrt(tr_LED^2 + tr_material^2 + tr_modal^2 + tr_receiver^2);
+
+// displaying results
+printf("System Rise Time: %.2f ns\n", tr_system * 1e9);
+printf("Bandwidth (NRZ) : %.2f MHz\n", B_NRZ / 1e6);
+printf("Bandwidth (RZ)  : %.2f MHz\n", B_RZ / 1e6);
+
+if B_NRZ >= 20e6
+    disp("NRZ format is supported.");
+else
+    disp("NRZ format is NOT supported.");
+end
+
+if B_RZ >= 20e6
+    disp("RZ format is supported.");
+else
+    disp("RZ format is NOT supported.");
+end
