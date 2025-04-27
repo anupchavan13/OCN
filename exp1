@@ -1,0 +1,28 @@
+t_s = input("enter the source rise time") * 10^-9;
+ps = input("enter the source power");
+pc = input("enter the loss per connector.");
+N = input("enter the number of connector");
+p_sys = input("enter the system margin");
+pr = input("enter the receiver power");
+BR = input("enter the receiver bandwidth") * 10^-6;
+alpha = input("enter the Attenuation");
+B0 = input("enter the bandwidth product") * 10^-6;
+q = input("enter the q");
+t_m = input("enter the material dispersion rise time") * 10^-9;
+m = 0;
+ps_loss = 0;
+t_d = 350 / B0;
+
+L = ps - pr - p_sys - N * pc - m * ps_loss;
+disp("Length is", L)
+
+t_modal = 440 * q^2 / B0;
+t_sys = sqrt(t_s^2 + t_d^2 + t_m^2 + t_modal^2);
+
+disp("system rise time", t_sys)
+
+NRZ = 0.7 / t_sys;
+RZ = 0.35 / t_sys;
+
+disp("NRZ Data Rate:", NRZ)
+disp("RZ Data Rate:", RZ)
