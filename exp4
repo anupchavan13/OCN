@@ -1,0 +1,26 @@
+P_input = input("Enter LED-coupled power (in micro-watts): ") * 1e-6;
+fiber_length = input("Enter fiber length (in km): ");
+attenuation_per_km = input("Enter fiber attenuation (in dB/km): ");
+splice_loss_per_km = input("Enter splice loss per km (in dB): ");
+interface_loss = input("Enter interface loss (in dB): ");
+P_min_required = input("Enter minimum required APD input power (in dBm): ");
+excess_noise_penalty = input("Enter excess noise penalty (in dB): ");
+safety_margin_required = input("Enter required safety margin (in dB): ");
+
+fiber_loss = attenuation_per_km * fiber_length;
+splice_loss = splice_loss_per_km * fiber_length;
+total_loss = fiber_loss + splice_loss + interface_loss + excess_noise_penalty;
+
+P_received_dBm = 10 * log10(P_input) - total_loss;
+
+system_margin = P_received_dBm - P_min_required;
+
+printf("Total System Loss: %.2f dB\n", total_loss);
+printf("Received Power at APD: %.2f dBm\n", P_received_dBm);
+printf("System Margin: %.2f dB\n", system_margin);
+
+if system_margin >= safety_margin_required
+    disp("The system is viable with these components.");
+else
+    disp("The system is NOT viable with these components.");
+end
