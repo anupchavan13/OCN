@@ -1,0 +1,33 @@
+roll_no = input("Enter your roll number:");
+tr_source = roll_no * 1e-9;
+fiber_intermodal_per_km = 9e-9;
+fiber_intramodal_per_km = 2e-9;
+BW_receiver = roll_no * 1e6;
+link_length = input("Enter the link length (in km):");
+BW_required = input("Enter the required bandwidth (in MHz):") * 1e6;
+
+tr_intermodal = fiber_intermodal_per_km * link_length;
+tr_intramodal = fiber_intramodal_per_km * link_length;
+
+tr_receiver = 0.35 / BW_receiver;
+
+tr_system = sqrt(tr_source^2 + tr_intermodal^2 + tr_intramodal^2 + tr_receiver^2);
+
+B_NRZ = 0.7 / tr_system;
+B_RZ = 0.35 / tr_system;
+
+printf("System Rise Time: %.2f ns\n", tr_system * 1e9);
+printf("Bandwidth (NRZ): %.2f MHz\n", B_NRZ / 1e6);
+printf("Bandwidth (RZ) : %.2f MHz\n", B_RZ / 1e6);
+
+if B_NRZ >= BW_required
+    disp("NRZ format is supported.");
+else
+    disp("NRZ format is NOT supported.");
+end
+
+if B_RZ >= BW_required
+    disp("RZ format is supported.");
+else
+    disp("RZ format is NOT supported.");
+end
